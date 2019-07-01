@@ -1,3 +1,3 @@
-### Countries 
+### Countries frontend
 
-Code we worked on for react router and authentication.
+React app frontend code we worked on for react router and authentication.
