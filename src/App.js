@@ -1,26 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Routes from './Routes';
+import axios from 'axios';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {countriesList: null}
+  // get countries list data
+  async componentDidMount() {
+    try {
+      const response = await axios.get('https://restcountries.eu/rest/v2/all')
+      this.setState({
+        countriesList: response.data
+      })
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
+  render() {
+    const {countriesList} = this.state
+    if (!countriesList) {
+      return null
+    } else {
+      return (
+        // pass that data to routes
+        <Routes countriesList={countriesList} />
+      )
+    }
+  }
 }
 
 export default App;
