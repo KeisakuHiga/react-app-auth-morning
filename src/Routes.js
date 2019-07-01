@@ -15,7 +15,7 @@ class Routes extends React.Component {
         }} />
         <Route path="/country/:name" component={GetCountryData} />
         <Route path="/login" render={() => {
-          return <Login />
+          return <Login login={this.props.login} authentication={authentication} />
         }}
         />
         <Route path="/search" />
