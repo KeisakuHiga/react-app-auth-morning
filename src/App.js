@@ -9,11 +9,20 @@ class App extends React.Component {
   async componentDidMount() {
     try {
       const response = await axios.get('https://restcountries.eu/rest/v2/all')
+      // const token = localStorage.getItem('token')
+      const authentication = await axios.get('http://localhost:5000/user/current-user', {headers: { token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoid2FkZSIsImlhdCI6MTU2MTk0NzQyMywiZXhwIjoxNTYyNTUyMjIzfQ.Qz5bbSiT4i7mfC9zZXNswc6SF30V-psW-84RZe8gLCA" }})
+      console.log(authentication)
       this.setState({
-        countriesList: response.data
+        countriesList: response.data,
+        authentication: true
       })
     } catch(err) {
       console.log(err)
+      const response = await axios.get('https://restcountries.eu/rest/v2/all')
+      this.setState({
+        countriesList: response.data,
+        authentication: false
+      })
     }
   }
 

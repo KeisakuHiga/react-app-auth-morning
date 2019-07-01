@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 const renderCountries = (countryList) => {
   return countryList.map((country, index) => {
@@ -8,13 +8,17 @@ const renderCountries = (countryList) => {
 }
 
 const List = (props) => {
-  const {countriesList} = props
+  const {countriesList, authentication} = props
   const result = renderCountries(countriesList)
-  return (
-    <div>
-      {result}
-    </div>
-  )
+  if (!authentication) {
+    return <Redirect to="/login" />
+  } else {
+    return (
+      <div>
+        {result}
+      </div>
+    )
+  }
 }
 
 export default List;
